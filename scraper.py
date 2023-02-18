@@ -1,7 +1,11 @@
-import http.client
+import http.client, urllib
 import json
+import os
 
 conn = http.client.HTTPSConnection("www.recreation.gov")
+
+pushover_api_token = os.environ.get('PUSHOVER_API_TOKEN')
+pushover_user_key = os.environ.get('PUSHOVER_USER_KEY')
 
 payload = ""
 
@@ -19,3 +23,13 @@ for date, divisions in data_json.items():
             elif division_code == "44585922":
                 location = "Lyell Canyon"
             print(f"{location} has {division['remaining']} remaining permits on {date}")
+
+
+conn = http.client.HTTPSConnection("api.pushover.net:443")
+conn.request("POST", "/1/messages.json",
+  urllib.parse.urlencode({
+    "token": pushover_api_token,
+    "user": pushover_api_token,
+    "message": "hello world",~
+  }), { "Content-type": "application/x-www-form-urlencoded" })
+conn.getresponse()
