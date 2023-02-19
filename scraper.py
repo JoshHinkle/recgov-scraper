@@ -30,6 +30,6 @@ conn.request("POST", "/1/messages.json",
   urllib.parse.urlencode({
     "token": pushover_api_token,
     "user": pushover_api_token,
-    "message": "hello world",~
+    "message": "hello world",
   }), { "Content-type": "application/x-www-form-urlencoded" })
 conn.getresponse()
